@@ -33,8 +33,8 @@ class MainTabBarController: UITabBarController {
         favoriteNavController.tabBarItem.image = #imageLiteral(resourceName: "favorites")
   
         viewControllers = [
+            genericNavigationController(for: PodCastViewController(), title: "Search", image: #imageLiteral(resourceName: "search")),
             favoriteNavController,
-            genericNavigationController(for: ViewController(), title: "Search", image: #imageLiteral(resourceName: "search")),
             genericNavigationController(for: ViewController(), title: "Download", image: #imageLiteral(resourceName: "downloads"))
             
         ]
