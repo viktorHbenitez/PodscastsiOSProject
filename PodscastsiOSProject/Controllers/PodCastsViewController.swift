@@ -18,14 +18,32 @@ class PodCastViewController: UITableViewController {
     
     let cellId = "cellId"
     
-     override func viewDidLoad() {
-        super.viewDidLoad()
+    // Lets implement a UISearchController
+    let searchController = UISearchController(searchResultsController: nil)
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupBarController()
+        setupTableView()
+    }
+    
+    
+    fileprivate func setupBarController(){
+        // Only for iOS 11.0+
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.delegate = self
+        
+        
+    }
+    
+    fileprivate func setupTableView(){
+        
         // 1. Register a cell for our tableView
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
         
     }
-    
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         
@@ -56,4 +74,20 @@ class PodCastViewController: UITableViewController {
     
 }
 
+// MARK:- Delegate and Protocols searchBar
+extension  PodCastViewController :  UISearchBarDelegate{
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        print(searchText)
+        
+        // later implements Alamofire toi search iTunes API
+    }
+    
+    
+    
+    
+    
+    
+    
+}
 
