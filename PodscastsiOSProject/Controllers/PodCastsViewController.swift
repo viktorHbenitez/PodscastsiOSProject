@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Alamofire
 
 class PodCastViewController: UITableViewController {
     
@@ -78,9 +78,25 @@ class PodCastViewController: UITableViewController {
 extension  PodCastViewController :  UISearchBarDelegate{
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        print(searchText)
         
         // later implements Alamofire toi search iTunes API
+        let url = "https://itunes.apple.com/search?term=\(searchText)"
+        
+        // CREATE RESPONSE SERVICE TO HTTP REQUEST
+        Alamofire.request(url).responseData { (dataReponse) in
+            
+            if let error = dataReponse.error{
+                print("Failed to contact to Yahoo", error)
+                return
+            }
+            
+            guard let data = dataReponse.data else { return }
+            let dummyString = String(data: data, encoding: .utf8)
+            print(dummyString ?? "")
+            
+        }
+        
+        
     }
     
     
