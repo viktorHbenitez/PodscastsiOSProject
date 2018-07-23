@@ -80,53 +80,39 @@ extension  PodCastViewController :  UISearchBarDelegate{
         
         
         // later implements Alamofire toi search iTunes API
-        let url = "https://itunes.apple.com/search?term=\(searchText)"
-        
+        //        let url = "https://itunes.apple.com/search?term=\(searchText)"
+        let url = "https://itunes.apple.com/search"
+        let dicParameters : Dictionary = ["term": searchText, "media": "podcast"]
         // CREATE RESPONSE SERVICE TO HTTP REQUEST
-        Alamofire.request(url).responseData { (dataReponse) in
+        
+        
+        Alamofire.request(url, method: .get, parameters: dicParameters, encoding: URLEncoding.default, headers: nil).responseData { (dataResponse) in
             
-            if let error = dataReponse.error{
+            if let error = dataResponse.error{
                 print("Failed to contact to iTunes", error)
                 return
             }
             
-            guard let data = dataReponse.data else { return }
-//            let dummyString = String(data: data, encoding: .utf8)
-//            print(dummyString ?? "")
+            guard let data = dataResponse.data else { return }
             
             do{
                 // Decodable external representantion with struct SearchResult
                 let searchResult = try JSONDecoder().decode(SearchResult.self, from: data)
-//                print("Result Count", searchResult.resultCount)
-//
-//                searchResult.results.forEach({ (podcast) in
-//
-//
-//                    print(podcast.artistName,podcast.trackName)
-//
-//                })
-//
+                
                 self.arrPodcasts = searchResult.results
                 self.tableView.reloadData()
-            
+                
                 
             }catch let decodeErr{
                 print("Faild to decoder", decodeErr)
             }
-          
+            
             
         }
+        
     }
     
-    // JSON is a external representation and tranfor to SearchResult Object
-    // IMPORTANT
-    /*
-     {  // THE SAME NAME OF THE JSON RESPONSE
-     "resultCount": 50,
-     "results": [
-     {
-     },
-     */
+  
     struct SearchResult: Decodable{
         let resultCount: Int
         let results: [Podcast]
