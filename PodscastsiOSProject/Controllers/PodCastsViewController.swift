@@ -11,9 +11,9 @@ import Alamofire
 
 class PodCastViewController: UITableViewController {
     
-    let podcast = [
-        Podcast(name: "Lets Buld That App", artistName: "Viktor Hugo Benitez"),
-        Podcast(name: "Podcast Project", artistName: "Some Author")
+    var arrPodcasts = [
+        Podcast(trackName: "Lets Buld That App", artistName: "Viktor Hugo Benitez"),
+        Podcast(trackName: "Podcast Project", artistName: "Some Author")
     ]
     
     let cellId = "cellId"
@@ -51,7 +51,7 @@ class PodCastViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return podcast.count
+        return arrPodcasts.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -59,8 +59,8 @@ class PodCastViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
         
         // Show the name of the Author
-        let podcast = self.podcast[indexPath.row]
-        cell.textLabel?.text = "\(podcast.name)\n\(podcast.artistName)"
+        let podcast = self.arrPodcasts[indexPath.row]
+        cell.textLabel?.text = "\(podcast.trackName ?? "")\n\(podcast.artistName ?? "")"
         cell.textLabel?.numberOfLines = -1
         
         cell.imageView?.image = #imageLiteral(resourceName: "appicon")
@@ -86,24 +86,51 @@ extension  PodCastViewController :  UISearchBarDelegate{
         Alamofire.request(url).responseData { (dataReponse) in
             
             if let error = dataReponse.error{
-                print("Failed to contact to Yahoo", error)
+                print("Failed to contact to iTunes", error)
                 return
             }
             
             guard let data = dataReponse.data else { return }
-            let dummyString = String(data: data, encoding: .utf8)
-            print(dummyString ?? "")
+//            let dummyString = String(data: data, encoding: .utf8)
+//            print(dummyString ?? "")
+            
+            do{
+                // Decodable external representantion with struct SearchResult
+                let searchResult = try JSONDecoder().decode(SearchResult.self, from: data)
+//                print("Result Count", searchResult.resultCount)
+//
+//                searchResult.results.forEach({ (podcast) in
+//
+//
+//                    print(podcast.artistName,podcast.trackName)
+//
+//                })
+//
+                self.arrPodcasts = searchResult.results
+                self.tableView.reloadData()
+            
+                
+            }catch let decodeErr{
+                print("Faild to decoder", decodeErr)
+            }
+          
             
         }
-        
-        
     }
     
-    
-    
-    
-    
-    
+    // JSON is a external representation and tranfor to SearchResult Object
+    // IMPORTANT
+    /*
+     {  // THE SAME NAME OF THE JSON RESPONSE
+     "resultCount": 50,
+     "results": [
+     {
+     },
+     */
+    struct SearchResult: Decodable{
+        let resultCount: Int
+        let results: [Podcast]
+    }
     
 }
 
