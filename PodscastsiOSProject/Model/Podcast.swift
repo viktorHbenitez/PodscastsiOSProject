@@ -11,7 +11,7 @@ import Foundation
 
 struct Podcast: Decodable {
     
-    var trackName: String?
+    var trackName : String?
     var artistName : String?
 }
 
