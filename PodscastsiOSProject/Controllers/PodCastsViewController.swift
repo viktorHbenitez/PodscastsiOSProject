@@ -77,46 +77,16 @@ class PodCastViewController: UITableViewController {
 // MARK:- Delegate and Protocols searchBar
 extension  PodCastViewController :  UISearchBarDelegate{
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
-        
-        // later implements Alamofire toi search iTunes API
-        //        let url = "https://itunes.apple.com/search?term=\(searchText)"
-        let url = "https://itunes.apple.com/search"
-        let dicParameters : Dictionary = ["term": searchText, "media": "podcast"]
-        // CREATE RESPONSE SERVICE TO HTTP REQUEST
-        
-        
-        Alamofire.request(url, method: .get, parameters: dicParameters, encoding: URLEncoding.default, headers: nil).responseData { (dataResponse) in
-            
-            if let error = dataResponse.error{
-                print("Failed to contact to iTunes", error)
-                return
-            }
-            
-            guard let data = dataResponse.data else { return }
-            
-            do{
-                // Decodable external representantion with struct SearchResult
-                let searchResult = try JSONDecoder().decode(SearchResult.self, from: data)
-                
-                self.arrPodcasts = searchResult.results
-                self.tableView.reloadData()
-                
-                
-            }catch let decodeErr{
-                print("Faild to decoder", decodeErr)
-            }
-            
-            
+     
+        APIService.shareInstance.fetchPodcast(with: searchText) { (arrPodcast) in
+            self.arrPodcasts =  arrPodcast
+            self.tableView.reloadData()
         }
         
     }
     
   
-    struct SearchResult: Decodable{
-        let resultCount: Int
-        let results: [Podcast]
-    }
+   
     
 }
 

@@ -10,6 +10,7 @@
 		D1E268F55C375AFCF3B460DD /* Pods_PodscastsiOSProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40DB6FBF67DEB7CAAF21D482 /* Pods_PodscastsiOSProject.framework */; };
 		E41DF4C12103A4DF004F7B73 /* PodCastsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41DF4C02103A4DF004F7B73 /* PodCastsViewController.swift */; };
 		E41DF4C32103A4F0004F7B73 /* Podcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41DF4C22103A4F0004F7B73 /* Podcast.swift */; };
+		E45E12102108412400E227C9 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45E120F2108412400E227C9 /* APIService.swift */; };
 		E484F91F2102E8A2008744C8 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E484F91E2102E8A2008744C8 /* MainTabBarController.swift */; };
 		E4DC27E72101A4B000C490E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DC27E62101A4B000C490E6 /* AppDelegate.swift */; };
 		E4DC27E92101A4B000C490E6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DC27E82101A4B000C490E6 /* ViewController.swift */; };
@@ -23,6 +24,7 @@
 		71DE3E6FFC98E7220A6A180C /* Pods-PodscastsiOSProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PodscastsiOSProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PodscastsiOSProject/Pods-PodscastsiOSProject.debug.xcconfig"; sourceTree = "<group>"; };
 		E41DF4C02103A4DF004F7B73 /* PodCastsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodCastsViewController.swift; sourceTree = "<group>"; };
 		E41DF4C22103A4F0004F7B73 /* Podcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Podcast.swift; sourceTree = "<group>"; };
+		E45E120F2108412400E227C9 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		E484F91E2102E8A2008744C8 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		E4DC27E32101A4B000C490E6 /* PodscastsiOSProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PodscastsiOSProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4DC27E62101A4B000C490E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +83,14 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
+		E45E120E2108410200E227C9 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				E45E120F2108412400E227C9 /* APIService.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 		E4DC27DA2101A4B000C490E6 = {
 			isa = PBXGroup;
 			children = (
@@ -102,6 +112,7 @@
 		E4DC27E52101A4B000C490E6 /* PodscastsiOSProject */ = {
 			isa = PBXGroup;
 			children = (
+				E45E120E2108410200E227C9 /* API */,
 				E41DF4C42103A64B004F7B73 /* Model */,
 				E41DF4C52103A657004F7B73 /* Controllers */,
 				E4DC27E62101A4B000C490E6 /* AppDelegate.swift */,
@@ -229,6 +240,7 @@
 				E4DC27E72101A4B000C490E6 /* AppDelegate.swift in Sources */,
 				E484F91F2102E8A2008744C8 /* MainTabBarController.swift in Sources */,
 				E41DF4C12103A4DF004F7B73 /* PodCastsViewController.swift in Sources */,
+				E45E12102108412400E227C9 /* APIService.swift in Sources */,
 				E41DF4C32103A4F0004F7B73 /* Podcast.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
