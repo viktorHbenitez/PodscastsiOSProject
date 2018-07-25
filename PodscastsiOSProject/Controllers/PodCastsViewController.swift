@@ -41,7 +41,9 @@ class PodCastViewController: UITableViewController {
     fileprivate func setupTableView(){
         
         // 1. Register a cell for our tableView
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
+//        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
+        let nibName = UINib(nibName: "PodcastCell", bundle: nil)
+        tableView.register(nibName, forCellReuseIdentifier: cellId)
         
     }
     
@@ -56,18 +58,19 @@ class PodCastViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! PodcastCell
         
-        // Show the name of the Author
-        let podcast = self.arrPodcasts[indexPath.row]
-        cell.textLabel?.text = "\(podcast.trackName ?? "")\n\(podcast.artistName ?? "")"
-        cell.textLabel?.numberOfLines = -1
         
-        cell.imageView?.image = #imageLiteral(resourceName: "appicon")
+        let podcastObject: Podcast = self.arrPodcasts[indexPath.row];
+        cell.podcast = podcastObject
         
         return cell
         
         
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 132
     }
     
     
