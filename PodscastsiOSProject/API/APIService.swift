@@ -29,15 +29,17 @@ class APIService {
                 return
             }
             
-            guard let data = dataResponse.data else { return }
+            guard let data = dataResponse.data  else { return }
             
             do{
                 // Decodable external representantion with struct SearchResult
                 let searchResult = try JSONDecoder().decode(SearchResult.self, from: data)
-                completionHandler(searchResult.results)
+                guard let queryResults = searchResult.results else {return}
+                
+                completionHandler(queryResults)
                 
             }catch let decodeErr{
-                print("Faild to decoder", decodeErr)
+                print("Faild to decoder", decodeErr.localizedDescription)
             }
             
             
@@ -49,7 +51,7 @@ class APIService {
     
     struct SearchResult: Decodable{
         let resultCount: Int
-        let results: [Podcast]
+        let results: [Podcast]?
     }
     
     
