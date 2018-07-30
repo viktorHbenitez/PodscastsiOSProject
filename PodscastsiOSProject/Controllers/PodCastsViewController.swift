@@ -11,10 +11,7 @@ import Alamofire
 
 class PodCastViewController: UITableViewController {
     
-    var arrPodcasts = [
-        Podcast(trackName: "Lets Buld That App", artistName: "Viktor Hugo Benitez"),
-        Podcast(trackName: "Podcast Project", artistName: "Some Author")
-    ]
+    var arrPodcasts = [Podcast]()  // Array init
     
     let cellId = "cellId"
     
@@ -41,7 +38,6 @@ class PodCastViewController: UITableViewController {
     fileprivate func setupTableView(){
         
         // 1. Register a cell for our tableView
-//        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
         let nibName = UINib(nibName: "PodcastCell", bundle: nil)
         tableView.register(nibName, forCellReuseIdentifier: cellId)
         
