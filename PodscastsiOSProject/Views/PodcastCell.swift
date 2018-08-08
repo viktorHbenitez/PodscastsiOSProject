@@ -24,9 +24,7 @@ class PodcastCell: UITableViewCell {
 //            lblEpisodeCount.text = "\(podcast.trackCount ?? 0) Episode" // other way
             lblEpisodeCount.text = "\(iNumberEpisode) Episodes"
             
-//            print("Loading image with url", podcast.artworkUrl600 ?? "")
-            
-            // Load image with url
+            // create a url with string
             guard let url : URL = URL(string: podcast.artworkUrl600 ?? "") else {return}
             
             // Load the image again when scroll the UITableView.
@@ -34,9 +32,6 @@ class PodcastCell: UITableViewCell {
             URLSession.shared.dataTask(with: url) { (data, _, _) in
                 
                 guard let data = data else {return}
-                
-//                print("Finished downloading image data:", data)
-                
                 DispatchQueue.main.async {
                     self.imgPodcast.image = UIImage(data: data)
                 }

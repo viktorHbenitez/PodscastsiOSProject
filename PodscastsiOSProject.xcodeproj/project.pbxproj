@@ -29,6 +29,7 @@
 		E45C38C4210905400000B43F /* PodcastCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PodcastCell.xib; sourceTree = "<group>"; };
 		E45C38C621090A920000B43F /* PodcastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastCell.swift; sourceTree = "<group>"; };
 		E45E120F2108412400E227C9 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		E46AD3EB211A7FB500524BC3 /* workflow-walkthrough.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "workflow-walkthrough.md"; sourceTree = "<group>"; };
 		E484F91E2102E8A2008744C8 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		E4DC27E32101A4B000C490E6 /* PodscastsiOSProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PodscastsiOSProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4DC27E62101A4B000C490E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -107,6 +108,7 @@
 		E4DC27DA2101A4B000C490E6 = {
 			isa = PBXGroup;
 			children = (
+				E46AD3EB211A7FB500524BC3 /* workflow-walkthrough.md */,
 				E4DC27E52101A4B000C490E6 /* PodscastsiOSProject */,
 				E4DC27E42101A4B000C490E6 /* Products */,
 				CAA5C52F0B9FAEA5C36568C3 /* Pods */,
