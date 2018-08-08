@@ -37,14 +37,27 @@ class PodCastViewController: UITableViewController {
     
     fileprivate func setupTableView(){
         
+        tableView.tableFooterView  = UIView() // Remove horizontal lines
+        
         // 1. Register a cell for our tableView
         let nibName = UINib(nibName: "PodcastCell", bundle: nil)
         tableView.register(nibName, forCellReuseIdentifier: cellId)
         
     }
     
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let lblDescription = UILabel()
+        lblDescription.text = "Please enter a Search Term"
+        lblDescription.textAlignment = .center
+        lblDescription.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        return lblDescription
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 250
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
-        
         return 1
     }
     

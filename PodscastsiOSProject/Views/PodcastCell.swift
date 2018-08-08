@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class PodcastCell: UITableViewCell {
     
@@ -28,16 +29,7 @@ class PodcastCell: UITableViewCell {
             guard let url : URL = URL(string: podcast.artworkUrl600 ?? "") else {return}
             
             // Load the image again when scroll the UITableView.
-            // The original form to load image without SDWebImage pod
-            URLSession.shared.dataTask(with: url) { (data, _, _) in
-                
-                guard let data = data else {return}
-                DispatchQueue.main.async {
-                    self.imgPodcast.image = UIImage(data: data)
-                }
-                
-            }.resume()
-            
+            imgPodcast.sd_setImage(with: url, completed: nil)
             
         }
     }

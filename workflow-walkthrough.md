@@ -1,34 +1,32 @@
-# Create and load image in iOS from service response
+# Create and load image in iOS from data service response
 
-##  Load and catching image without SDWebImage (Original form)
+##  Load and catching image with  SDWebImage framework
 
+![imagen](../master/assets/SDWebImageLogo.png)  
+A link:  
+[SDWebImage](https://github.com/rs/SDWebImage)  
+
+This library provides an async image downloader with cache support. For convenience, 
+we added categories for UI elements like UIImageView, UIButton, MKAnnotationView  
 
 ### Steps
+1. Go to podfile and add de SDWebImage pod  
+2. `import SDWebImage` extension for UIView  
+3. Set the image wtih methos `imgPodcast.sd_setImage(with: url, completed: nil)` 
+4. go to Network  and test the activity  (check the differents networking activity)
 
-1. change the object model (podcast) to set the image property  
-2. ATS App Transport Security for http domains add in `info.plist` (figure 1)  
-3. Load image without SDWebImage (pod) in `PodcastCelll.xib` (use `URLSession`)  
-4. construct the image with data response service and embed in the main thread  
-when load and show the image (`DispatchQueue.main.async`)  
-5. **IMPORTANT**: This method always load the image, never caching in the app  
+**Custom the `UITableView` when no exist any podcast object  (figure 2)**
+1. Use `viewForHeaderInSection` UITableView method to set a label
+2. `heightForHeaderInSection` to set the size (label description)
+3. Remove horizontal lines  `UITableView.tableFooterView = UIView()`  
+4. labels properties : `font =  UIFont.systemFont()`, `TextAlignment = .center`
 
-Figure 1 
-```swift
-    // in info.plist Add in source code for ATS http domains
-    
-    <key>NSAppTransportSecurity</key>
-    <dict>
-        <key>NSExceptionDomains</key>
-        <dict>
-            <key>mzstatic.com</key>
-            <dict>
-                <key>NSExceptionAllowsInsecureHTTPLoads</key>
-                <true/>
-                <key>NSIncludesSubdomains</key>
-                <true/>
-            </dict>
-        </dict>
-    </dict>
-```
+What the different between `URLSession` and SDWebImage framework?  
 
-![imagen](../master/assets/sketch.png)
+SDWebImage: Not load more data use catching  
+URLSession: Network activity, no catching the image  
+
+![imagen](../master/assets/figure2.png)  
+
+![imagen](../master/assets/SDWebImage.png)  
+
