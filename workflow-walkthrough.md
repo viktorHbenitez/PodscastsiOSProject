@@ -1,32 +1,16 @@
-# Create and load image in iOS from data service response
+# Showing episode controller
 
-##  Load and catching image with  SDWebImage framework
+##  Showing episode controller
 
-![imagen](../master/assets/SDWebImageLogo.png)  
-A link:  
-[SDWebImage](https://github.com/rs/SDWebImage)  
-
-This library provides an async image downloader with cache support. For convenience, 
-we added categories for UI elements like UIImageView, UIButton, MKAnnotationView  
+![imagen](../master/assets/sketch1.gif)  
 
 ### Steps
-1. Go to podfile and add de SDWebImage pod  
-2. `import SDWebImage` extension for UIView  
-3. Set the image wtih methos `imgPodcast.sd_setImage(with: url, completed: nil)` 
-4. go to Network  and test the activity  (check the differents networking activity)
+1. Use a ternary operator to control the size heightForHeaderInSection return `self.arrPodcasts.count > 0 ?0:250`  
+2. Process to create and load the new `EpisodesViewController class`    
+3. Present the EpisodioVC  with `navigationController?.pushViewController()` method   
+4. if you have problem with navigation Controller programatically or the title in the navigationItem does 
+not appers you can use `self.definesPresentationContext = true` **figure1**  
 
-**Custom the `UITableView` when no exist any podcast object  (figure 2)**
-1. Use `viewForHeaderInSection` UITableView method to set a label
-2. `heightForHeaderInSection` to set the size (label description)
-3. Remove horizontal lines  `UITableView.tableFooterView = UIView()`  
-4. labels properties : `font =  UIFont.systemFont()`, `TextAlignment = .center`
+![imagen](../master/assets/figure1.png)  
 
-What the different between `URLSession` and SDWebImage framework?  
-
-SDWebImage: Not load more data use catching  
-URLSession: Network activity, no catching the image  
-
-![imagen](../master/assets/figure2.png)  
-
-![imagen](../master/assets/SDWebImage.png)  
 

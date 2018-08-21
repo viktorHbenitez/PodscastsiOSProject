@@ -26,6 +26,9 @@ class PodCastViewController: UITableViewController {
     
     
     fileprivate func setupBarController(){
+        
+        
+        self.definesPresentationContext = true // I do not cover all the UITableViewController, show the navigationController
         // Only for iOS 11.0+
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
@@ -45,6 +48,16 @@ class PodCastViewController: UITableViewController {
         
     }
     
+    // MARK:- Delegate and Protocols UITableView
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let episodeVC = EpisodesViewController()
+        
+        let podcast : Podcast = self.arrPodcasts[indexPath.row]
+        episodeVC.podcast = podcast
+        navigationController?.pushViewController(episodeVC, animated: true)
+    }
+    
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let lblDescription = UILabel()
         lblDescription.text = "Please enter a Search Term"
@@ -54,7 +67,8 @@ class PodCastViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 250
+        // ternary operation
+        return self.arrPodcasts.count > 0 ? 0 : 250
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
