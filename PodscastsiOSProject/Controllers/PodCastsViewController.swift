@@ -68,7 +68,9 @@ class PodCastViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         // ternary operation
-        return self.arrPodcasts.count > 0 ? 0 : 250
+        return self.arrPodcasts.count > 0 ? 0 : 250 // Show and hide please enter a search term
+        
+        
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {

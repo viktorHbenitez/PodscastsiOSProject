@@ -11,7 +11,6 @@ import UIKit
 
 class EpisodesViewController: UITableViewController {
     
-    
     var podcast : Podcast? {
         didSet{
             navigationItem.title = podcast?.trackName
