@@ -8,25 +8,73 @@
 
 import Foundation
 import UIKit
+import FeedKit  // 1. Import XML parser cocoa pods
 
 class EpisodesViewController: UITableViewController {
-    
-    var podcast : Podcast? {
-        didSet{
-            navigationItem.title = podcast?.trackName
-        }
-    }
     
     // generate a constructor with a ll properties on it
     struct Episode {
         let title : String
     }
     
-    var arrEpisode : [Episode] = [
-        Episode(title: "FirsEpisode"),
-        Episode(title: "SecondEpisode"),
-        Episode(title: "ThirdEpisode")
-    ]
+    var arrEpisode : [Episode] = [Episode]()
+    
+    var podcast : Podcast? {
+        didSet{
+            navigationItem.title = podcast?.trackName
+            fetchEpisode()
+        }
+    }
+    
+    private func fetchEpisode(){
+        // Another way to unwrap an optional variable
+        print("Looking for episodes at feed url:", podcast?.feedUrl ?? "")
+        
+        
+        // 2. Create URL with String
+        guard let feedUrl : String = podcast?.feedUrl else {return}
+        
+        // NOTE : CHANGE HTTP TO HTTPS OHTER WAY TO READ http domains
+        let secureFeedUrl = feedUrl.contains("https") ? feedUrl : feedUrl.replacingOccurrences(of: "http", with: "https")
+        
+        guard let url : URL = URL(string: secureFeedUrl) else {return}
+        
+        // 3. Parse XML url with FeedKit
+        let parser = FeedParser(URL: url)
+        
+        parser?.parseAsync(result: { (result) in  // Method with block result
+            
+            // associative enumeration values
+            switch result {
+            case let .rss(feed):
+                
+                // 1. Show name podcast in the tableView
+                var episodes = [Episode]() // 1.2 blank Episode array
+                
+                feed.items?.forEach({ (feedItem) in // 1.3 Loop the items
+                    print("Name Feed Item", feedItem.title ?? "")
+                    
+                    let objectEpisode : Episode = Episode(title: feedItem.title ?? "")
+                    episodes.append(objectEpisode)  // append in the blank array
+                    
+                })
+                
+                self.arrEpisode = episodes  // 1.4 Set the new array in the general Array
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()  // 1.5 Reaload TableView in the main Thread
+                }
+                break
+                
+            case let .failure(error):
+                print("Failed to parse feed:", error)
+                break
+            default:
+                print("Found a feed....")
+            }
+        })
+        
+    }
+    
     
     
     fileprivate let cellId = "cellId"
@@ -37,6 +85,7 @@ class EpisodesViewController: UITableViewController {
         setupTableView()
         
     }
+    
     
     fileprivate func setupTableView(){
         
