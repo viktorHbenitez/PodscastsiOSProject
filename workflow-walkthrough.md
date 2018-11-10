@@ -1,7 +1,6 @@
 # Showing episode controller
 
-
-## 2. Parsing RSS XML Feed with FeedKit
+## Parsing RSS XML Feed with FeedKit
 [LBTA](https://www.letsbuildthatapp.com/course_video?id=2532)  
 
 **library through Cocoapods to quickly and easily parse XML into usable Swift objects**  
@@ -79,8 +78,52 @@ import FeedKit  // 1. Import XML parser cocoa pods
     }
 ```
 
+## Podcasts UITableViewController + UISearchController
 
-##  1. Showing episode controller
+UISearchController for searching in the navigation area  
+
+![imagen](../master/assets/searchbar.gif)  
+
+
+`// 1. Lets implement a UISearchController`
+`let searchController = UISearchController(searchResultsController: nil)`
+
+
+```swift
+
+    fileprivate func setupBarController(){
+        
+        self.definesPresentationContext = true // I do not cover all the UITableViewController, show the navigationController
+        // Only for iOS 11.0+
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.delegate = self
+        
+        
+    }
+    
+    // MARK:- Delegate and Protocols searchBar
+extension  PodCastViewController :  UISearchBarDelegate{
+
+    // change the array content
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {     
+        APIService.shareInstance.fetchPodcast(with: searchText) { (arrPodcast) in
+            self.arrPodcasts =  arrPodcast
+            self.tableView.reloadData()
+        }
+        
+    }
+    
+}
+```
+
+
+
+
+
+
+##  Showing episode controller
 
 ![imagen](../feature-showingEpisodeController/assets/sketch1.gif)  
 

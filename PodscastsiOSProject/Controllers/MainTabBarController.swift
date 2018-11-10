@@ -27,7 +27,7 @@ class MainTabBarController: UITabBarController {
     func setupViewController(){
         
         // Should use genericNavigationController
-        let favoriteNavController = UINavigationController(rootViewController: ViewController())
+        let favoriteNavController = UINavigationController(rootViewController: EpisodesViewController())
         favoriteNavController.viewControllers.first?.navigationItem.title = "Prueba"
         favoriteNavController.tabBarItem.title = "Favorite"
         favoriteNavController.tabBarItem.image = #imageLiteral(resourceName: "favorites")
@@ -35,7 +35,7 @@ class MainTabBarController: UITabBarController {
         viewControllers = [
             genericNavigationController(for: PodCastViewController(), title: "Search", image: #imageLiteral(resourceName: "search")),
             favoriteNavController,
-            genericNavigationController(for: ViewController(), title: "Download", image: #imageLiteral(resourceName: "downloads"))
+            genericNavigationController(for: EpisodesViewController(), title: "Download", image: #imageLiteral(resourceName: "downloads"))
             
         ]
     }

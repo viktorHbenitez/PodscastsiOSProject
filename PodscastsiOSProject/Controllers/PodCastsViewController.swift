@@ -27,7 +27,6 @@ class PodCastViewController: UITableViewController {
     
     fileprivate func setupBarController(){
         
-        
         self.definesPresentationContext = true // I do not cover all the UITableViewController, show the navigationController
         // Only for iOS 11.0+
         navigationItem.searchController = searchController
@@ -112,9 +111,6 @@ extension  PodCastViewController :  UISearchBarDelegate{
         }
         
     }
-    
-  
-   
     
 }
 
